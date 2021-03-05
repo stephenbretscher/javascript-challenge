@@ -30,6 +30,8 @@ populate();
 //event listener for filter button click 
 var filterButton = d3.select('#filter-btn');
 filterButton.on('click', function() {
+    //use d3 to prevent page from reloading
+    d3.event.preventDefault();
 
     //Select and filter by user's date input
     var dateInput = d3.select("#datetime").property("value");
@@ -37,7 +39,7 @@ filterButton.on('click', function() {
     //first set original table equal to nothing, clearing space for new table
     tbody.html("");
     //----------------------------------------------------------
-    // Write new table with forEach loop
+    // Loop writes new filtered table
     filtered.forEach(i => {
         // append new row to table
         var new_row = tbody.append("tr");
