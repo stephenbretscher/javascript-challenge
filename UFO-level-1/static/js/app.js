@@ -12,7 +12,7 @@ function populate() {
         // append new row to table 
         var new_row = tbody.append("tr");
         
-        // populate cells in new row: datetime, city, state, country, shape, and comment
+        // populate cells in new row: datetime, city, state, country, shape, duration, and comment
         new_row.append('td').text(data.datetime);
         new_row.append('td').text(data.city);
         new_row.append('td').text(data.state);
@@ -27,12 +27,31 @@ populate();
 
 //Populate based on date/time input
 
-//event listener for button click 
+//event listener for filter button click 
 var filterButton = d3.select('#filter-btn');
 filterButton.on('click', function() {
-    
 
+    //Select and filter by user's date input
+    var dateInput = d3.select("#datetime").property("value");
+    var filtered = tableData.filter(data => data.datetime == dateInput);
+    //first set original table equal to nothing, clearing space for new table
+    tbody.html("");
+    //----------------------------------------------------------
+    // Write new table with forEach loop
+    filtered.forEach(i => {
+        // append new row to table
+        var new_row = tbody.append("tr");
 
+        // populate cells in new row: datetime, city, state, country, shape, duration, and comment
+        new_row.append("td").text(i.datetime);
+        new_row.append("td").text(i.city);
+        new_row.append("td").text(i.state);
+        new_row.append("td").text(i.country);
+        new_row.append("td").text(i.shape);
+        new_row.append("td").text(i.durationMinutes);
+        new_row.append("td").text(i.comments);
+    });
+    //----------------------------------------------------------
 });
 
 
